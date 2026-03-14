@@ -1,0 +1,118 @@
+/* Cyberpunk Color Palette */
+:root {
+  --neon-green: #00ff9f;
+  --neon-green-dim: #00cc7f;
+  --neon-cyan: #00d4ff;
+  --neon-magenta: #ff00aa;
+  --neon-yellow: #ffee00;
+  --neon-red: #ff3344;
+  --neon-red-dim: #cc2233;
+
+  --bg-dark: #0a0a0f;
+  --bg-panel: #12121a;
+  --bg-card: #1a1a28;
+  --bg-elevated: #22223a;
+
+  --border-dim: #2a2a3a;
+  --border-glow: #00ff9f44;
+  --border-red: #ff334444;
+
+  --text-primary: #e0e0e8;
+  --text-secondary: #8888a0;
+  --text-dim: #55556a;
+  --text-accent: var(--neon-green);
+
+  --glow-green: 0 0 10px #00ff9f66, 0 0 30px #00ff9f22;
+  --glow-cyan: 0 0 10px #00d4ff66, 0 0 30px #00d4ff22;
+  --glow-magenta: 0 0 10px #ff00aa66, 0 0 30px #ff00aa22;
+  --glow-red: 0 0 10px #ff334466, 0 0 30px #ff334422;
+  --glow-red-intense: 0 0 8px #ff334488, 0 0 24px #ff334444, 0 0 48px #ff334418;
+
+  --font-mono: 'IBM Plex Mono', 'Courier New', Courier, monospace;
+
+  --heat-safe: var(--neon-green);
+  --heat-overclocked: var(--neon-yellow);
+  --heat-redline: #ff6600;
+  --heat-crash: var(--neon-red);
+}
+
+/* CSS Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-mono);
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100svh;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+/* App container — mobile-first, full viewport */
+.app {
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Screen base */
+.screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Placeholder screen */
+.placeholder-screen {
+  gap: 16px;
+  color: var(--text-secondary);
+}
+
+/* Shared button styles */
+.btn {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 12px 32px;
+  border: 1px solid var(--border-dim);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+  position: relative;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  border-color: var(--neon-red-dim);
+  color: var(--neon-red);
+  box-shadow: var(--glow-red);
+}
+
+.btn-primary:active {
+  background: #ff334412;
+}
