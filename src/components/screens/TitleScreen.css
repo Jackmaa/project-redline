@@ -1,0 +1,330 @@
+/* ═══════════════════════════════════════════
+   TITLE SCREEN — Protocol: Redline
+   Boot sequence → Title reveal → Menu
+   ═══════════════════════════════════════════ */
+
+.title-screen {
+  background: var(--bg-dark);
+  justify-content: center;
+  padding: 0;
+  position: relative;
+}
+
+/* ─── Animated grid background ─── */
+.title-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 51, 68, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 51, 68, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: grid-drift 20s linear infinite;
+}
+
+@keyframes grid-drift {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+/* ─── Horizontal scanline ─── */
+.title-scanline {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.title-scanline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 51, 68, 0.12) 20%,
+    rgba(255, 51, 68, 0.25) 50%,
+    rgba(255, 51, 68, 0.12) 80%,
+    transparent 100%
+  );
+  animation: scanline-sweep 4s ease-in-out infinite;
+}
+
+@keyframes scanline-sweep {
+  0% { top: -2px; }
+  100% { top: 100%; }
+}
+
+/* ─── Vignette overlay ─── */
+.title-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+/* ─── Content container ─── */
+.title-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 24px 20px;
+  width: 100%;
+  max-width: 400px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.title-content--booted {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Boot log lines ─── */
+.title-boot-log {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  text-align: left;
+}
+
+.boot-line {
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  opacity: 0;
+  animation: boot-type 0.4s ease forwards;
+}
+
+.boot-line--1 { animation-delay: 0.1s; }
+.boot-line--2 { animation-delay: 0.4s; }
+.boot-line--3 {
+  animation-delay: 0.7s;
+  color: var(--neon-red);
+  opacity: 0;
+}
+
+@keyframes boot-type {
+  0% { opacity: 0; transform: translateX(-4px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* ─── Title block ─── */
+.title-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  animation: title-emerge 1s ease forwards;
+  animation-delay: 1s;
+}
+
+@keyframes title-emerge {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+    filter: blur(4px);
+  }
+  60% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+.title-main {
+  font-family: var(--font-mono);
+  font-size: clamp(2rem, 9vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 0.2em;
+  position: relative;
+}
+
+.title-protocol {
+  color: var(--text-primary);
+  letter-spacing: 0.12em;
+}
+
+.title-colon {
+  color: var(--text-dim);
+  font-weight: 300;
+}
+
+.title-redline {
+  color: var(--neon-red);
+  letter-spacing: 0.15em;
+  text-shadow: var(--glow-red-intense);
+  animation: redline-pulse 3s ease-in-out infinite;
+}
+
+@keyframes redline-pulse {
+  0%, 100% {
+    text-shadow: var(--glow-red-intense);
+  }
+  50% {
+    text-shadow:
+      0 0 12px #ff334499,
+      0 0 32px #ff334455,
+      0 0 64px #ff334422;
+  }
+}
+
+/* ─── Title horizontal rule ─── */
+.title-rule {
+  width: 100%;
+  max-width: 280px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--neon-red) 30%,
+    var(--neon-red) 70%,
+    transparent 100%
+  );
+  opacity: 0.4;
+  box-shadow: 0 0 8px #ff334444;
+}
+
+/* ─── Tagline ─── */
+.title-tagline {
+  font-size: clamp(0.625rem, 2.5vw, 0.75rem);
+  font-weight: 300;
+  color: var(--text-secondary);
+  letter-spacing: 0.06em;
+  text-align: center;
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+/* ─── Menu ─── */
+.title-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  max-width: 260px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.title-menu--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.title-menu-btn {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border-dim);
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  touch-action: manipulation;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-btn-icon {
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+}
+
+.title-menu-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Jack In — primary action */
+.title-menu-btn--jack-in {
+  color: var(--neon-red);
+  border-color: rgba(255, 51, 68, 0.3);
+}
+
+.title-menu-btn--jack-in::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255, 51, 68, 0.06) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.title-menu-btn--jack-in:active::before {
+  opacity: 1;
+}
+
+.title-menu-btn--jack-in .menu-btn-icon {
+  opacity: 0.8;
+}
+
+/* Disabled state */
+.title-menu-btn--disabled {
+  color: var(--text-dim);
+  border-color: rgba(42, 42, 58, 0.5);
+  cursor: default;
+}
+
+.title-menu-btn--disabled .menu-btn-icon {
+  opacity: 0.25;
+}
+
+/* ─── Footer ─── */
+.title-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  font-size: 0.5625rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.title-footer--visible {
+  opacity: 1;
+}
+
+.footer-sep {
+  color: rgba(255, 51, 68, 0.3);
+}
