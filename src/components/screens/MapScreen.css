@@ -1,0 +1,144 @@
+/* ═══════════════════════════════════════════
+   MAP SCREEN — Network graph navigation
+   Canvas-rendered branching path map
+   ═══════════════════════════════════════════ */
+
+.map-screen {
+  background: var(--bg-dark);
+  padding: 0;
+  justify-content: flex-start;
+  gap: 0;
+  overflow: hidden;
+}
+
+/* ─── Header ─── */
+.map-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-dim);
+  flex-shrink: 0;
+  z-index: 5;
+}
+
+.map-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.map-act-label {
+  font-size: 0.5rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: var(--neon-red);
+  text-transform: uppercase;
+}
+
+.map-act-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+}
+
+.map-header-right {
+  display: flex;
+  align-items: center;
+}
+
+.map-deck-name {
+  font-size: 0.5625rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+/* ─── Scrollable map ─── */
+.map-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  position: relative;
+}
+
+.map-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.map-canvas {
+  display: block;
+  touch-action: pan-y;
+}
+
+/* ─── Node info tooltip ─── */
+.map-node-info {
+  position: absolute;
+  bottom: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-dim);
+  animation: info-fade-in 0.2s ease;
+}
+
+@keyframes info-fade-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(4px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.map-node-type {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.map-node-visited {
+  font-size: 0.5rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+/* ─── Legend ─── */
+.map-legend {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 16px 12px;
+  border-top: 1px solid var(--border-dim);
+  flex-shrink: 0;
+}
+
+.legend-item {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.legend-label {
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.legend-combat { color: var(--neon-red); }
+.legend-elite { color: var(--neon-yellow); }
+.legend-event { color: var(--neon-cyan); }
+.legend-shop { color: var(--neon-green); }
+.legend-rest { color: var(--neon-green); }
