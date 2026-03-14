@@ -1,0 +1,43 @@
+import type { Cyberdeck } from '../types/cyberdecks';
+
+export const CYBERDECKS: Cyberdeck[] = [
+  {
+    id: 'vanta-0',
+    name: 'VANTA-0 "Bootstrap"',
+    baseRam: 3,
+    memorySlots: 2,
+    uploadSlots: 2,
+    gearSlots: 1,
+    drawCount: 5,
+    heatSink: 6,
+    trait: null,
+    playstyle: 'Balanced hacking',
+    flavorText: 'The cheapest deck that can still survive a Redline run.',
+  },
+  {
+    id: 'ghostdeck',
+    name: 'GhostDeck',
+    baseRam: 3,
+    memorySlots: 3,
+    uploadSlots: 3,
+    gearSlots: 1,
+    drawCount: 6,
+    heatSink: 4,
+    trait: 'First Daemon each turn costs 1 less RAM.',
+    playstyle: 'Stealth daemon specialist',
+    flavorText: 'Deck used by the legendary runner ZeroTrace. Can hide processes from ICE.',
+  },
+  {
+    id: 'helios-mk4',
+    name: 'Helios MK-IV',
+    baseRam: 2,
+    memorySlots: 2,
+    uploadSlots: 2,
+    gearSlots: 2,
+    drawCount: 5,
+    heatSink: 8,
+    trait: 'Start combat with 8 Firewall.',
+    playstyle: 'Corporate defense deck',
+    flavorText: 'White chrome. Gold circuitry. Military-grade cooling.',
+  },
+];

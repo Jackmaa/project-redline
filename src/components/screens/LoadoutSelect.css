@@ -1,0 +1,333 @@
+/* ═══════════════════════════════════════════
+   LOADOUT SELECT — Cyberdeck requisition
+   Stolen datapad, classified hardware specs
+   ═══════════════════════════════════════════ */
+
+.loadout-screen {
+  background: var(--bg-dark);
+  padding: 0;
+  justify-content: flex-start;
+  gap: 0;
+}
+
+/* ─── Header ─── */
+.loadout-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 12px;
+  border-bottom: 1px solid var(--border-dim);
+  flex-shrink: 0;
+  z-index: 5;
+}
+
+.loadout-back {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--border-dim);
+  color: var(--text-secondary);
+  cursor: pointer;
+  touch-action: manipulation;
+  flex-shrink: 0;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.loadout-back:active {
+  color: var(--text-primary);
+  border-color: var(--text-dim);
+}
+
+.loadout-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.loadout-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.loadout-sublabel {
+  font-size: 0.5625rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+}
+
+.loadout-header-spacer {
+  width: 36px;
+  flex-shrink: 0;
+}
+
+/* ─── Scrollable deck area ─── */
+.deck-scroll {
+  flex: 1;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 24px 0;
+  gap: 0;
+}
+
+.deck-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.deck-card-wrapper {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+}
+
+/* ─── Deck card ─── */
+.deck-card {
+  width: 100%;
+  max-width: 320px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-dim);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.deck-card--active {
+  border-color: var(--deck-accent);
+  box-shadow: var(--deck-glow);
+}
+
+/* Corner decorations */
+.deck-corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+}
+
+.deck-corner--tl {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--deck-accent);
+  border-left: 2px solid var(--deck-accent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.deck-corner--br {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--deck-accent);
+  border-right: 2px solid var(--deck-accent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.deck-card--active .deck-corner {
+  opacity: 1;
+}
+
+/* ─── Deck header ─── */
+.deck-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.deck-name {
+  font-family: var(--font-mono);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--deck-accent);
+}
+
+.deck-playstyle {
+  font-size: 0.625rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+/* ─── Divider ─── */
+.deck-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--border-dim) 20%,
+    var(--border-dim) 80%,
+    transparent 100%
+  );
+}
+
+/* ─── Stats grid ─── */
+.deck-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 20px;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.stat-label-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stat-icon {
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.stat-label {
+  font-size: 0.5625rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  min-width: 20px;
+  text-align: right;
+}
+
+/* ─── Trait box ─── */
+.deck-trait {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid var(--deck-accent);
+  background: var(--deck-bg);
+  position: relative;
+}
+
+.deck-trait-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--deck-accent);
+  text-transform: uppercase;
+}
+
+.trait-icon {
+  color: var(--deck-accent);
+}
+
+.deck-trait-text {
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+/* ─── Flavor text ─── */
+.deck-flavor {
+  margin-top: auto;
+}
+
+.deck-flavor p {
+  font-size: 0.6875rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+/* ─── Dot indicators ─── */
+.deck-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 0 20px;
+  flex-shrink: 0;
+}
+
+.deck-dot {
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--border-dim);
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.deck-dot--active {
+  background: var(--dot-color);
+  border-color: var(--dot-color);
+  box-shadow: 0 0 6px var(--dot-color);
+}
+
+/* ─── Initialize button ─── */
+.loadout-action {
+  width: 100%;
+  padding: 0 24px 24px;
+  flex-shrink: 0;
+}
+
+.loadout-init-btn {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 14px 24px;
+  background: transparent;
+  border: 1px solid var(--init-accent);
+  color: var(--init-accent);
+  box-shadow: var(--init-glow);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: all 0.2s ease;
+}
+
+.loadout-init-btn:active {
+  transform: scale(0.98);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.init-icon {
+  flex-shrink: 0;
+}
