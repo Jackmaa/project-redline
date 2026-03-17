@@ -3,6 +3,7 @@ import { TitleScreen } from './components/screens/TitleScreen';
 import { LoreIntro } from './components/screens/LoreIntro';
 import { LoadoutSelect } from './components/screens/LoadoutSelect';
 import { MapScreen } from './components/screens/MapScreen';
+import { CombatScreen } from './components/screens/CombatScreen';
 import './App.css';
 
 function App() {
@@ -18,6 +19,8 @@ function App() {
         return <LoadoutSelect />;
       case Screen.Map:
         return <MapScreen />;
+      case Screen.Combat:
+        return <CombatScreen />;
       default:
         return (
           <div className="screen placeholder-screen">
